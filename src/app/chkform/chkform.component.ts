@@ -55,7 +55,9 @@ export class ChkformComponent implements OnInit {
     res.forEach(element => {
     this.programmingLanguageList.push(new Item(element,element));
       
-    });  
+    }); 
+    this.populateProgrammingLanguage();
+
     console.log(res);
     });
   }
@@ -90,7 +92,6 @@ export class ChkformComponent implements OnInit {
     //   new Item('v7',4)
     // ];
     
-    this.populateProgrammingLanguage();
     
   }
   
@@ -158,10 +159,22 @@ export class ChkformComponent implements OnInit {
         this.selectedLanguageCount--;
     }
   }
-  
+getselectedRoles()
+{
+ var roles=[];
+ this.programmingLanguages().controls.forEach(element => {
+   if(element.value)
+   {
+     roles.push(element);
+   }
+ });
+ return roles;
+}  
   //submit click
   public submit(e: any): void {
     console.log(this.sampleForm.value);
+    console.log("selected roles");
+    console.log(this.getselectedRoles());
     e.preventDefault();
     
      //reset 
