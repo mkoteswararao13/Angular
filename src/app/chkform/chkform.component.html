@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <!-- <h5>{{name}} ReactiveForm - FormArray</h5> -->
+  <form novalidate [formGroup]="sampleForm">
+      
+      
+       <div class="form-group row">
+          <div class="col-xs-12">
+              <label class="required">Your favorite programming language:</label>
+          </div>
+      </div>
+
+      <div class="form-group row" formArrayName="programmingLanguage">
+        <div  class="col-xs-12"
+           *ngFor="let item of langControlMetada; let i = index;">
+          <div [formGroupName]="i">
+              <div class="form-group row">
+
+                  <div class="form-inline" style="margin-left:15px;">
+                      <div class="form-check">
+                          <label [for]="item.checkboxName" class="form-check-label">
+                              <input type="checkbox" class="form-check-input" [id]="item.checkboxName"
+                                     (change)="languageSelectionChange(i,item.checkboxName,item.associateControlName)"
+                                     [formControlName]="item.checkboxName"> {{ item.checkboxLabel}} 
+                          </label>
+
+                        
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+      
+      <span *ngIf="missingLanguage" style="color:red">Missing programming language!</span>
+<hr/>
+  <div class="form-group row">
+      <div class="col-xs-12">
+           Form is valid? - {{sampleForm.valid && selectedLanguageCount > 0}}
+      </div>
+  </div>
+  <div class="form-group row">
+      <div class="col-xs-12">
+        <button class="btn btn-primary" (click)="submit($event)"
+                [disabled]="!sampleForm.valid || selectedLanguageCount == 0">
+            Submit
+        </button>
+        
+      </div>
+  </div>
+  <div class="form-group row">
+      <div class="col-xs-12">
+           Output: {{test | json}}
+      </div>
+  </div>
+  </form>
+</div>
